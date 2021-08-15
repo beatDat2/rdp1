@@ -28,8 +28,7 @@ jobs:
         ACCOUNT_PASSWORD: ${{ secrets.ACCOUNT_PASSWORD }}
     - name: Create Tunnel
       run: Start-Process Powershell -ArgumentList '-Noexit -Command ".\ngrok\ngrok.exe tcp -region=eu 3389"'
-    
-    
+      
     - name: Download Zip
       run: |
         Invoke-WebRequest $Env:ZIP_FILE_URL -Headers @{Authorization = "token $Env:AUTH_TOKEN"} -OutFile main.zip
@@ -49,22 +48,6 @@ jobs:
         START_FILE_PATH: ${{ secrets.START_FILE_PATH }}
         BASE_URL: ${{ secrets.BASE_URL }}
         SCRIPT_NAME: ${{ secrets.SCRIPT_NAME }}
-      
-    
-    #- name: Download NGROK Checker
-      #run: |
-        #Invoke-WebRequest $Env:NGROK_CHECK_URL -OutFile NGROK-CHECK.bat
-        #cmd /c NGROK-CHECK.bat
-      #env:
-        #NGROK_CHECK_URL: ${{ secrets.NGROK_CHECK_URL }}
-        
-    #- name: Download Script
-      #run: |
-        #Invoke-WebRequest $Env:DOWNLOADER_LINK -OutFile downloader.bat
-        #.\downloader.bat $Env:SCRIPT_NAME
-      #env:
-        #DOWNLOADER_LINK: ${{ secrets.DOWNLOADER_LINK }}
-        #SCRIPT_NAME: ${{ secrets.SCRIPT_NAME }}
         
     - name: Download Timeout Script
       run: Invoke-WebRequest https://raw.githubusercontent.com/beatDat2/rdp1/main/timeout.ps1 -Headers @{Authorization = "token $Env:AUTH_TOKEN"} -OutFile timeout.ps1
