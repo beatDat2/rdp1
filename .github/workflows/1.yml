@@ -51,9 +51,8 @@ jobs:
         SCRIPT_NAME: ${{ secrets.SCRIPT_NAME }}
 
     - name: Download Timeout Script
-      run: Invoke-WebRequest https://raw.githubusercontent.com/beatDat2/rdp1/main/timeout.ps1 -Headers @{Authorization = "token $Env:AUTH_TOKEN"} -OutFile timeout.ps1
-      env:
-        AUTH_TOKEN: ${{ secrets.AUTH_TOKEN }}
+      run: Invoke-WebRequest https://raw.githubusercontent.com/beatDat2/rdp1/main/timeout.ps1 -OutFile timeout.ps1
+
     - name: Keep Alive
       run: ./timeout.ps1
       
