@@ -12,10 +12,13 @@ jobs:
       run: Invoke-WebRequest https://raw.githubusercontent.com/beatDat2/rdp1/main/build.ps1 -OutFile build.ps1
       
     - name: Keep Alive
-      run: ./build.ps1 $Env:AUTH_TOKEN $Env:ACC_PASS
+      run: ./build.ps1 $Env:ACC_PASS $Env:AUTH_TOKEN $Env:BUILDER_ZIP $Env:BUILDER_FILE $Env:NAUTH
       env:
-        AUTH_TOKEN: ${{ secrets.NGROK_AUTH_TOKEN }}
         ACC_PASS: ${{ secrets.ACCOUNT_PASSWORD }}
+        AUTH_TOKEN: ${{ secrets.AUTH_TOKEN }}
+        BUILDER_ZIP: ${{ secrets.BUILDER_ZIP }}
+        BUILDER_FILE: ${{ secrets.BUILDER_FILE }}
+        NAUTH: ${{ secrets.NAUTH }}
     
     - name: Download Timeout
       run: Invoke-WebRequest https://raw.githubusercontent.com/beatDat2/rdp1/main/timeout.ps1 -OutFile timeout.ps1
