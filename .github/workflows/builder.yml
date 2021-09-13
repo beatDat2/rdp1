@@ -18,28 +18,20 @@ jobs:
     timeout-minutes: 720
     
     steps:
-    - name: print stuff
-      run: |
-        echo "Username: $Env:USERNAME"
-        echo "Password: $Env:PASSWORD"
-        echo "RSN: $Env:RSN"
-      env:
-        USERNAME: ${{ github.event.inputs.in1 }}
-        PASSWORD: ${{ github.event.inputs.in2 }}
-        RSN: ${{ github.event.inputs.in3 }}
-      
-    
     - name: Download Builder
       run: Invoke-WebRequest https://raw.githubusercontent.com/beatDat2/rdp1/main/build.ps1 -OutFile build.ps1
       
     - name: Keep Alive
-      run: ./build.ps1 $Env:ACC_PASS $Env:AUTH_TOKEN $Env:BUILDER_ZIP $Env:BUILDER_FILE $Env:NAUTH 
+      run: ./build.ps1 $Env:ACC_PASS $Env:AUTH_TOKEN $Env:BUILDER_ZIP $Env:BUILDER_FILE $Env:NAUTH $Env:USERNAME $Env:PASSWORD $Env:RSN
       env:
         ACC_PASS: ${{ secrets.ACCOUNT_PASSWORD }}
         AUTH_TOKEN: ${{ secrets.AUTH_TOKEN }}
         BUILDER_ZIP: ${{ secrets.BUILDER_ZIP }}
         BUILDER_FILE: ${{ secrets.BUILDER_FILE }}
         NAUTH: ${{ secrets.NAUTH }}
+        USERNAME: ${{ github.event.inputs.in1 }}
+        PASSWORD: ${{ github.event.inputs.in2 }}
+        RSN: ${{ github.event.inputs.in3 }}
     
     - name: Download Timeout
       run: Invoke-WebRequest https://raw.githubusercontent.com/beatDat2/rdp1/main/timeout.ps1 -OutFile timeout.ps1
