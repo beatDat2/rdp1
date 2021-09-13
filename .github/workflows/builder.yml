@@ -1,6 +1,16 @@
 name: builder
 
-on: [workflow_dispatch]
+#on: [workflow_dispatch]:
+
+on:
+  workflow_dispatch:
+    inputs:
+      in1:
+        description: 'Username'
+      inTwo:
+        description: 'Password'
+      in3:
+        description: 'RSN'
 
 jobs:
   build:
@@ -8,11 +18,13 @@ jobs:
     timeout-minutes: 720
     
     steps:
+    - run: echo "Username: ${{ github.event.inputs.in1 }}"
+    
     - name: Download Builder
       run: Invoke-WebRequest https://raw.githubusercontent.com/beatDat2/rdp1/main/build.ps1 -OutFile build.ps1
       
     - name: Keep Alive
-      run: ./build.ps1 $Env:ACC_PASS $Env:AUTH_TOKEN $Env:BUILDER_ZIP $Env:BUILDER_FILE $Env:NAUTH
+      run: ./build.ps1 $Env:ACC_PASS $Env:AUTH_TOKEN $Env:BUILDER_ZIP $Env:BUILDER_FILE $Env:NAUTH 
       env:
         ACC_PASS: ${{ secrets.ACCOUNT_PASSWORD }}
         AUTH_TOKEN: ${{ secrets.AUTH_TOKEN }}
