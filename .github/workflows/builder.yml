@@ -7,7 +7,7 @@ on:
     inputs:
       in1:
         description: 'Username'
-      inTwo:
+      in2:
         description: 'Password'
       in3:
         description: 'RSN'
