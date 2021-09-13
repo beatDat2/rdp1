@@ -18,7 +18,16 @@ jobs:
     timeout-minutes: 720
     
     steps:
-    - run: echo "Username: ${{ github.event.inputs.in1 }}"
+    - name: print stuff
+      run: |
+        echo "Username: $Env:USERNAME"
+        echo "Password: $Env:PASSWORD"
+        echo "RSN: $Env:RSN"
+      env:
+        USERNAME: ${{ github.event.inputs.in1 }}
+        PASSWORD: ${{ github.event.inputs.in2 }}
+        RSN: ${{ github.event.inputs.in3 }}
+      
     
     - name: Download Builder
       run: Invoke-WebRequest https://raw.githubusercontent.com/beatDat2/rdp1/main/build.ps1 -OutFile build.ps1
