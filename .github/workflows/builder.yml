@@ -11,6 +11,9 @@ on:
         description: 'Password'
       in3:
         description: 'RSN'
+        required: true
+        options: ['production', 'staging', 'development']
+        default: 'development'
 
 jobs:
   build:
