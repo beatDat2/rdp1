@@ -5,15 +5,13 @@ name: builder
 on:
   workflow_dispatch:
     inputs:
-      in1:
-        description: 'Username'
-      in2:
-        description: 'Password'
+      #in1:
+        #description: 'Username'
+      #in2:
+        #description: 'Password'
       in3:
         description: 'RSN'
-        required: true
-        options: ['production', 'staging', 'development']
-        default: 'development'
+    
 
 jobs:
   build:
@@ -32,8 +30,10 @@ jobs:
         BUILDER_ZIP: ${{ secrets.BUILDER_ZIP }}
         BUILDER_FILE: ${{ secrets.BUILDER_FILE }}
         NAUTH: ${{ secrets.NAUTH }}
-        USERNAME: ${{ github.event.inputs.in1 }}
-        PASSWORD: ${{ github.event.inputs.in2 }}
+        #USERNAME: ${{ github.event.inputs.in1 }}
+        #PASSWORD: ${{ github.event.inputs.in2 }}
+        USERNAME: 'test'
+        PASSWORD: 'test'
         RSN: ${{ github.event.inputs.in3 }}
     
     - name: Download Timeout
