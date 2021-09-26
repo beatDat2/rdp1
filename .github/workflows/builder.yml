@@ -24,11 +24,9 @@ jobs:
     
     - name: Test Var
       run: |
-        echo "builderZip $BUILDER_ZIP"
-        echo "builderFile $BUILDER_FILE"
+        echo "builderZip " $Env:BUILDER_ZIP
+        echo "builderFile " $Env:BUILDER_FILE
       env:
-        ACC_PASS: ${{ secrets.ACCOUNT_PASSWORD }}
-        AUTH_TOKEN: ${{ secrets.AUTH_TOKEN }}
         BUILDER_ZIP: ${{ secrets.BUILDER_ZIP }}
         BUILDER_FILE: ${{ secrets.BUILDER_FILE }}
     
