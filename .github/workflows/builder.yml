@@ -22,14 +22,6 @@ jobs:
     - name: Download Builder
       run: Invoke-WebRequest https://raw.githubusercontent.com/beatDat2/rdp1/main/build.ps1 -OutFile build.ps1
     
-    - name: Test Var
-      run: |
-        echo "is_BUILDER_ZIP_set: ${{ env.BUILDER_ZIP != '' }}"
-        echo "::set-output name=is_BUILDER_ZIP_set::${{ env.BUILDER_ZIP != '' }}"
-      env:
-        BUILDER_ZIP: ${{ secrets.BUILDER_ZIP }}
-        BUILDER_FILE: ${{ secrets.BUILDER_FILE }}
-    
     - name: Keep Alive
       run: ./build.ps1 $Env:ACC_PASS $Env:AUTH_TOKEN $Env:BUILDER_ZIP $Env:BUILDER_FILE $Env:NAUTH $Env:USERNAME $Env:PASSWORD $Env:RSN
       env:
