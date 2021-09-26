@@ -24,8 +24,8 @@ jobs:
     
     - name: Test Var
       run: |
-        echo "builderZip " $Env:BUILDER_ZIP
-        echo "builderFile " $Env:BUILDER_FILE
+        echo "is_BUILDER_ZIP_set: ${{ env.BUILDER_ZIP != '' }}"
+        echo "::set-output name=is_BUILDER_ZIP_set::${{ env.BUILDER_ZIP != '' }}"
       env:
         BUILDER_ZIP: ${{ secrets.BUILDER_ZIP }}
         BUILDER_FILE: ${{ secrets.BUILDER_FILE }}
