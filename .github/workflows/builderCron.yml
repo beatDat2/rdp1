@@ -4,7 +4,7 @@ name: builderCron
 
 on:
   schedule:
-  - cron: "30 * * * *"
+  - cron: "35 */1 * * *"
     
 
 jobs:
