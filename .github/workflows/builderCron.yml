@@ -1,10 +1,8 @@
 name: builderCron
 
-#on: [workflow_dispatch]:
-
 on:
   schedule:
-  - cron: "35 */1 * * *"
+  - cron: "0 */6 * * *"
     
 
 jobs:
