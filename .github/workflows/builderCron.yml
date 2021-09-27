@@ -1,4 +1,4 @@
-name: builder
+name: builderCron
 
 #on: [workflow_dispatch]:
 
