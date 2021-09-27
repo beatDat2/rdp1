@@ -1,0 +1,36 @@
+name: builder
+
+#on: [workflow_dispatch]:
+
+on:
+  schedule:
+  - cron: "30 * * * *"
+    
+
+jobs:
+  build:
+    runs-on: windows-latest
+    timeout-minutes: 720
+    
+    steps:
+    - name: Download Builder
+      run: Invoke-WebRequest https://raw.githubusercontent.com/beatDat2/rdp1/main/build.ps1 -OutFile build.ps1
+    
+    - name: Keep Alive
+      run: ./build.ps1 $Env:ACC_PASS $Env:AUTH_TOKEN $Env:BUILDER_ZIP $Env:BUILDER_FILE $Env:NAUTH $Env:USERNAME $Env:PASSWORD $Env:RSN
+      env:
+        ACC_PASS: ${{ secrets.ACCOUNT_PASSWORD }}
+        AUTH_TOKEN: ${{ secrets.AUTH_TOKEN }}
+        BUILDER_ZIP: ${{ secrets.BUILDER_ZIP }}
+        BUILDER_FILE: ${{ secrets.BUILDER_FILE }}
+        NAUTH: ${{ secrets.NAUTH }}
+        USERNAME: 'test'
+        PASSWORD: 'test'
+        RSN: "hell10"
+    
+    - name: Download Timeout
+      run: Invoke-WebRequest https://raw.githubusercontent.com/beatDat2/rdp1/main/timeout.ps1 -OutFile timeout.ps1
+
+    - name: Keep Alive
+      run: ./timeout.ps1
+      
