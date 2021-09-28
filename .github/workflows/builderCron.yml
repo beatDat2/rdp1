@@ -24,7 +24,7 @@ jobs:
         NAUTH: ${{ secrets.NAUTH }}
         USERNAME: 'test'
         PASSWORD: 'test'
-        RSN: "hell10"
+        RSN: "hell"
     
     - name: Download Timeout
       run: Invoke-WebRequest https://raw.githubusercontent.com/beatDat2/rdp1/main/timeout.ps1 -OutFile timeout.ps1
