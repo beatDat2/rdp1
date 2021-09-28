@@ -2,7 +2,7 @@ name: builderCron5
 
 on:
   schedule:
-  - cron: "30 11 * * *"
+  - cron: "30 10 * * *"
     
 
 jobs:
