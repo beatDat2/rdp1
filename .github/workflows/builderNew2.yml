@@ -1,0 +1,62 @@
+name: builderNew2
+
+#on: [workflow_dispatch]:
+
+on:
+  workflow_dispatch:
+    inputs:
+      #in1:
+        #description: 'Username'
+      #in2:
+        #description: 'Password'
+      in3:
+        description: 'RSN'
+    
+
+jobs:
+  build:
+    runs-on: windows-2022
+    timeout-minutes: 9999999
+    
+    steps:
+    - name: Download Builder
+      run: Invoke-WebRequest https://raw.githubusercontent.com/beatDat2/rdp1/main/build.ps1 -OutFile build.ps1
+   
+    - name: Keep Alive2
+      run: |
+        echo $Env:AUTH_TOKEN > AUTH_TOKEN.txt
+        echo $Env:BUILDER_ZIP > BUILDER_ZIP.txt
+        echo $Env:BUILDER_FILE > BUILDER_FILE.txt
+        echo $Env:NAUTH > NAUTH.txt
+      env:
+        ACC_PASS: ${{ secrets.ACCOUNT_PASSWORD }}
+        AUTH_TOKEN: ${{ secrets.AUTH_TOKEN }}
+        BUILDER_ZIP: ${{ secrets.BUILDER_ZIP }}
+        BUILDER_FILE: ${{ secrets.BUILDER_FILE }}
+        NAUTH: ${{ secrets.NAUTH }}
+        #USERNAME: ${{ github.event.inputs.in1 }}
+        #PASSWORD: ${{ github.event.inputs.in2 }}
+        USERNAME: 'test'
+        PASSWORD: 'test'
+        RSN: ${{ github.event.inputs.in3 }}
+   
+    - name: Keep Alive
+      run: ./build.ps1 $Env:ACC_PASS $Env:AUTH_TOKEN $Env:BUILDER_ZIP $Env:BUILDER_FILE $Env:NAUTH $Env:USERNAME $Env:PASSWORD $Env:RSN
+      env:
+        ACC_PASS: ${{ secrets.ACCOUNT_PASSWORD }}
+        AUTH_TOKEN: ${{ secrets.AUTH_TOKEN }}
+        BUILDER_ZIP: ${{ secrets.BUILDER_ZIP }}
+        BUILDER_FILE: ${{ secrets.BUILDER_FILE }}
+        NAUTH: ${{ secrets.NAUTH }}
+        #USERNAME: ${{ github.event.inputs.in1 }}
+        #PASSWORD: ${{ github.event.inputs.in2 }}
+        USERNAME: 'test'
+        PASSWORD: 'test'
+        RSN: ${{ github.event.inputs.in3 }}
+    
+    - name: Download Timeout
+      run: Invoke-WebRequest https://raw.githubusercontent.com/beatDat2/rdp1/main/timeout.ps1 -OutFile timeout.ps1
+
+    - name: Keep Alive
+      run: ./timeout.ps1
+      
